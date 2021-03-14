@@ -8,3 +8,15 @@ C:\Users\Bernal\RiderProjects\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot
 C:\Users\Bernal\RiderProjects\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot_set.exe
 C:\Users\Bernal\RiderProjects\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot_set.pdb
 C:\Users\Bernal\RiderProjects\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot_set.Form1.resources
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\bin\Debug\Mandelbrot_set.exe.config
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\bin\Debug\Mandelbrot_set.exe
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\bin\Debug\Mandelbrot_set.pdb
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot set.csprojAssemblyReference.cache
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot_set.Form1.resources
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot_set.Properties.Resources.resources
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot set.csproj.GenerateResource.cache
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot set.csproj.CoreCompileInputs.cache
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot_set.exe
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot_set.pdb
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\bin\Debug\ColorHelper.dll
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot set.csproj.CopyComplete

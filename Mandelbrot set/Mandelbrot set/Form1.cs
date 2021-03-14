@@ -6,22 +6,76 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using ColorHelper;
+using ColorConverter = ColorHelper.ColorConverter;
 
 namespace Mandelbrot_set
 {
     public partial class Form1 : Form
     {
         private Bitmap Image;
-        private int iterations = 1000;
+        private int height;
+        private int width;
+        private int iterations;
+        private Color[,] imagePixels;
         public Form1()
         {
             InitializeComponent();
             Image = new Bitmap(1000,1000);
+            height = Image.Height;
+            width = Image.Width;
+            imagePixels = new Color[width,height];
         }
-
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(Image, 0,0);
+        }
+        private void CalculateSet()
+        {
+            var scale = (double) ScaleFactor.Value;
+            var Xscale = XScale.Value;
+            Parallel.For(0, 24, (i, state) =>
+            {
+                var yStart = width / 24 * i;
+                var yEnd = width / 24 * (i + 1);
+                for (int y = yStart; y < yEnd; y++)
+                {
+                    for (int x = 0; x < height; x++)
+                    {
+                        var point = coordFromPixelLocation(
+                            x-(Xscale),y,-scale,scale,-scale,scale);
+                        var result = GetPixelInSet(point.x, point.y);
+                        
+                        if (result == 0)
+                        {
+                            imagePixels[x, y] = Color.Black;
+                        }
+                        else
+                        {
+                            var hueValue = (int) ((100 * result) / NumberOfIterations.Value);
+                            RGB rgb = ColorConverter.HslToRgb(new HSL(hueValue, 255,50));
+                            imagePixels[x, y] = Color.FromArgb(rgb.R, rgb.G, rgb.B);
+                        }
+                    }
+                }
+            });
+            DrawSet();
+            Refresh();
+        }
+        private void DrawSet()
+        {
+            for (int y = 0; y < width; y++)
+            {
+                for (int x = 0; x < height; x++)
+                {
+                    Image.SetPixel(x,y,imagePixels[x,y]);
+                }
+            }
+        }
         private int GetPixelInSet(double x, double y)
         {
             var Z = new Complex(0d,0d);
@@ -33,57 +87,34 @@ namespace Mandelbrot_set
                 Z = (Z * Z) + C;
                 n++;
             }
-            return Z.Modulus() > 2 ? 0 : 1;
+            return Z.Modulus() > 2 ? n : 0;
         }
-        
-        private Point2d coordFromPixelLocation (int pixelX,int pixelY,double minCoordX, double maxCoordX,double minCoordY,double maxCoordY)
+        private Point2d coordFromPixelLocation (decimal pixelX,int pixelY,double minCoordX, double maxCoordX,double minCoordY,double maxCoordY)
         {
-            var xPercent = (float) pixelX / Image.Width;
-            var yPercent = (float) pixelY / Image.Height;
+            var xPercent = (float) pixelX / width;
+            var yPercent = (float) pixelY / height;
 
             var newX = minCoordX + (maxCoordX - minCoordX) * xPercent;
             var newY = minCoordY + (maxCoordY - minCoordY) * yPercent;
 
             return new Point2d (newX, newY);
         }
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            
-            var g = Graphics.FromImage(Image);
-            
-            for (int y = 0; y < Image.Width; y++)
-            {
-                for (int x = 0; x < Image.Height; x++)
-                {
-                    var point = coordFromPixelLocation(x,y,-0,0.5,-0.5,0);
-                    var test = GetPixelInSet(point.x, point.y);
-                    if (test == 0)
-                    {
-                        g.DrawRectangle(Pens.White, new Rectangle(x,y,1,1));
-                    }
-                    else
-                    {
-                        g.DrawRectangle(Pens.Black, new Rectangle(x,y,1,1));
-                    }
-                }
-            }
-            e.Graphics.DrawImage(Image, 0,0);
+            iterations = (int) NumberOfIterations.Value;
+            CalculateSet();
         }
     }
-
     public struct Point2d
     {
         public double x;
         public double y;
-
         public Point2d(double x, double y)
         {
             this.x = x;
             this.y = y;
         }
     }
-
     public struct Complex {
         public double real;
         public double imaginary;
@@ -92,9 +123,7 @@ namespace Mandelbrot_set
             this.real = real;
             this.imaginary = imaginary;
         }
-        
         public static Complex operator +(Complex one, Complex two) => new Complex(one.real + two.real, one.imaginary + two.imaginary);
-
         public static Complex operator *(Complex one, Complex two)
         {
             Complex output = new Complex();
@@ -102,7 +131,6 @@ namespace Mandelbrot_set
             output.imaginary = (two.real * one.imaginary) + (two.imaginary * one.real);
             return output;
         }
-
         public double Modulus() => Math.Sqrt((real * real)+(imaginary * imaginary));
     }
 }
