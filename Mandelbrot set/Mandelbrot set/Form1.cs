@@ -36,7 +36,7 @@ namespace Mandelbrot_set
         }
         private void CalculateSet()
         {
-            var scale = (double) ScaleFactor.Value;
+            var zoom = (double) ScaleFactor.Value;
             var Xscale = XScale.Value;
             Parallel.For(0, 24, (i, state) =>
             {
@@ -46,8 +46,11 @@ namespace Mandelbrot_set
                 {
                     for (int x = 0; x < height; x++)
                     {
+                        var moveLeft =(int) (Xscale * (decimal) zoom) * 100;
+                        var scale = 2 / zoom;
+                        
                         var point = coordFromPixelLocation(
-                            x-(Xscale),y,-scale,scale,-scale,scale);
+                            x-(moveLeft),y,-scale,scale,-scale,scale);
                         var result = GetPixelInSet(new Complex(0,0), new Complex(point.x,point.y));
                         
                         if (result == 0)
@@ -68,7 +71,7 @@ namespace Mandelbrot_set
         }
         private void CalculateJulia(int X, int Y)
         {
-            var scale = (double) ScaleFactor.Value;
+            var zoom = (double) ScaleFactor.Value;
             var Xscale = XScale.Value;
             Parallel.For(0, 24, (i, state) =>
             {
@@ -78,8 +81,11 @@ namespace Mandelbrot_set
                 {
                     for (int x = 0; x < height; x++)
                     {
-                        var point = coordFromPixelLocation(x-(Xscale),y,-scale,scale,-scale,scale);
-                        var pointC = coordFromPixelLocation(X-(Xscale),Y,-scale,scale,-scale,scale);
+                        var moveLeft =(int) (Xscale * (decimal) zoom) * 100;
+                        var scale = 2 / zoom;
+
+                        var point = coordFromPixelLocation(x-(moveLeft),y,-scale,scale,-scale,scale);
+                        var pointC = coordFromPixelLocation(X-(moveLeft),Y,-scale,scale,-scale,scale);
                         
                         var result = GetPixelInSet(new Complex(point.x,point.y), new Complex(pointC.x,pointC.y));
                         

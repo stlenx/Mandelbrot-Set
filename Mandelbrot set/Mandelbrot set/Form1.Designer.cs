@@ -61,12 +61,13 @@
             // 
             // ScaleFactor
             // 
-            this.ScaleFactor.DecimalPlaces = 5;
             this.ScaleFactor.Location = new System.Drawing.Point(743, 17);
-            this.ScaleFactor.Maximum = new decimal(new int[] {10, 0, 0, 0});
+            this.ScaleFactor.Maximum = new decimal(new int[] {100000000, 0, 0, 0});
+            this.ScaleFactor.Minimum = new decimal(new int[] {1, 0, 0, 0});
             this.ScaleFactor.Name = "ScaleFactor";
             this.ScaleFactor.Size = new System.Drawing.Size(59, 20);
             this.ScaleFactor.TabIndex = 2;
+            this.ScaleFactor.Value = new decimal(new int[] {1, 0, 0, 0});
             // 
             // XScale
             // 
