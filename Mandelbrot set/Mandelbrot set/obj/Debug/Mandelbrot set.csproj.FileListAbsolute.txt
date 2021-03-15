@@ -20,3 +20,5 @@ E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot_
 E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot_set.pdb
 E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\bin\Debug\ColorHelper.dll
 E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\obj\Debug\Mandelbrot set.csproj.CopyComplete
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\bin\Debug\Cloo.dll
+E:\Mandelbrot\Mandelbrot-Set\Mandelbrot set\Mandelbrot set\bin\Debug\Cloo.xml

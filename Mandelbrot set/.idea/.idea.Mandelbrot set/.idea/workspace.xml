@@ -89,6 +89,8 @@
       <workItem from="1615716707923" duration="4559000" />
       <workItem from="1615732796101" duration="3239000" />
       <workItem from="1615741528555" duration="11886000" />
+      <workItem from="1615761083055" duration="2329000" />
+      <workItem from="1615804763390" duration="3438000" />
     </task>
     <servers />
   </component>
@@ -107,27 +109,28 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="191" key="GridCell.Tab.0.bottom" timestamp="1615753925886">
+    <state width="1877" height="71" key="GridCell.Tab.0.bottom" timestamp="1615808272015">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615753925886" />
-    <state width="1877" height="191" key="GridCell.Tab.0.center" timestamp="1615753925886">
+    <state width="1877" height="71" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615808272015" />
+    <state width="1877" height="71" key="GridCell.Tab.0.center" timestamp="1615808272015">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615753925886" />
-    <state width="1877" height="191" key="GridCell.Tab.0.left" timestamp="1615753925886">
+    <state width="1877" height="71" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615808272015" />
+    <state width="1877" height="71" key="GridCell.Tab.0.left" timestamp="1615808272015">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615753925886" />
-    <state width="1877" height="191" key="GridCell.Tab.0.right" timestamp="1615753925886">
+    <state width="1877" height="71" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615808272015" />
+    <state width="1877" height="71" key="GridCell.Tab.0.right" timestamp="1615808272015">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615753925886" />
+    <state width="1877" height="71" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615808272015" />
     <state width="1877" height="191" key="GridCell.Tab.1.bottom" timestamp="1615753925886">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -204,9 +207,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="590" y="178" key="ToolboxManager/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615741569851" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1615751411055">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1615807228210">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615751411055" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1615807228210" />
   </component>
 </project>

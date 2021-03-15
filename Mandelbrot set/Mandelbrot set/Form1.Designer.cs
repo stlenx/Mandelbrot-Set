@@ -33,6 +33,7 @@
             this.NumberOfIterations = new System.Windows.Forms.NumericUpDown();
             this.ScaleFactor = new System.Windows.Forms.NumericUpDown();
             this.XScale = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize) (this.NumberOfIterations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.ScaleFactor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.XScale)).BeginInit();
@@ -75,11 +76,19 @@
             this.XScale.Size = new System.Drawing.Size(92, 20);
             this.XScale.TabIndex = 3;
             // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 17);
+            this.label1.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 961);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.XScale);
             this.Controls.Add(this.ScaleFactor);
             this.Controls.Add(this.NumberOfIterations);
@@ -87,11 +96,15 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             ((System.ComponentModel.ISupportInitialize) (this.NumberOfIterations)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.ScaleFactor)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.XScale)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Label label1;
 
         private System.Windows.Forms.NumericUpDown XScale;
 

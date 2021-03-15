@@ -33,6 +33,10 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="Cloo, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\Cloo.clSharp.1.0.1\lib\netstandard2.0\Cloo.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="ColorHelper, Version=1.4.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\packages\ColorHelper.1.4.0\lib\netstandard2.0\ColorHelper.dll</HintPath>
           <Private>True</Private>

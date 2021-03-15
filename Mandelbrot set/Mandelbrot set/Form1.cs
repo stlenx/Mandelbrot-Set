@@ -48,7 +48,40 @@ namespace Mandelbrot_set
                     {
                         var point = coordFromPixelLocation(
                             x-(Xscale),y,-scale,scale,-scale,scale);
-                        var result = GetPixelInSet(point.x, point.y);
+                        var result = GetPixelInSet(new Complex(0,0), new Complex(point.x,point.y));
+                        
+                        if (result == 0)
+                        {
+                            imagePixels[x, y] = Color.Black;
+                        }
+                        else
+                        {
+                            var hueValue = (int) ((100 * result) / NumberOfIterations.Value);
+                            RGB rgb = ColorConverter.HslToRgb(new HSL(hueValue, 255,50));
+                            imagePixels[x, y] = Color.FromArgb(rgb.R, rgb.G, rgb.B);
+                        }
+                    }
+                }
+            });
+            DrawSet();
+            Refresh();
+        }
+        private void CalculateJulia(int X, int Y)
+        {
+            var scale = (double) ScaleFactor.Value;
+            var Xscale = XScale.Value;
+            Parallel.For(0, 24, (i, state) =>
+            {
+                var yStart = width / 24 * i;
+                var yEnd = width / 24 * (i + 1);
+                for (int y = yStart; y < yEnd; y++)
+                {
+                    for (int x = 0; x < height; x++)
+                    {
+                        var point = coordFromPixelLocation(x-(Xscale),y,-scale,scale,-scale,scale);
+                        var pointC = coordFromPixelLocation(X-(Xscale),Y,-scale,scale,-scale,scale);
+                        
+                        var result = GetPixelInSet(new Complex(point.x,point.y), new Complex(pointC.x,pointC.y));
                         
                         if (result == 0)
                         {
@@ -76,11 +109,8 @@ namespace Mandelbrot_set
                 }
             }
         }
-        private int GetPixelInSet(double x, double y)
+        private int GetPixelInSet(Complex Z, Complex C)
         {
-            var Z = new Complex(0d,0d);
-            var C = new Complex(x,y);
-            
             var n = 0;
             while (Z.Modulus() <= 2 && n < iterations)
             {
@@ -103,6 +133,16 @@ namespace Mandelbrot_set
         {
             iterations = (int) NumberOfIterations.Value;
             CalculateSet();
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            CalculateJulia(e.X,e.Y);
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            label1.Text = "X=" + e.X + " | Y=" + e.Y;
         }
     }
     public struct Point2d
