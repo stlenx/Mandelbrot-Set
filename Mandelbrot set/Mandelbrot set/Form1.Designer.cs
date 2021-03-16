@@ -34,6 +34,7 @@
             this.ScaleFactor = new System.Windows.Forms.NumericUpDown();
             this.XScale = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize) (this.NumberOfIterations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.ScaleFactor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.XScale)).BeginInit();
@@ -84,11 +85,22 @@
             this.label1.Size = new System.Drawing.Size(78, 17);
             this.label1.TabIndex = 4;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(883, 49);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(88, 22);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Animate";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 961);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.XScale);
             this.Controls.Add(this.ScaleFactor);
@@ -104,6 +116,8 @@
             ((System.ComponentModel.ISupportInitialize) (this.XScale)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button button2;
 
         private System.Windows.Forms.Label label1;
 

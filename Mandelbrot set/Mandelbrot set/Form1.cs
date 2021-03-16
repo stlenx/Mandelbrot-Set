@@ -18,6 +18,7 @@ namespace Mandelbrot_set
     public partial class Form1 : Form
     {
         private Bitmap Image;
+        private Bitmap SecondImage;
         private int height;
         private int width;
         private int iterations;
@@ -34,14 +35,22 @@ namespace Mandelbrot_set
         {
             e.Graphics.DrawImage(Image, 0,0);
         }
+        private void AnimationJulia()
+        {
+            for (int pos = -width/8; pos < width/2; pos+=1)
+            {
+                CalculateJulia(pos,pos);
+            }
+        }
         private void CalculateSet()
         {
             var zoom = (double) ScaleFactor.Value;
             var Xscale = XScale.Value;
-            Parallel.For(0, 24, (i, state) =>
+            var threads = 24;
+            Parallel.For(0, threads, (i, state) =>
             {
-                var yStart = width / 24 * i;
-                var yEnd = width / 24 * (i + 1);
+                var yStart = width / threads * i;
+                var yEnd = width / threads * (i + 1);
                 for (int y = yStart; y < yEnd; y++)
                 {
                     for (int x = 0; x < height; x++)
@@ -53,7 +62,7 @@ namespace Mandelbrot_set
                             x-(moveLeft),y,-scale,scale,-scale,scale);
                         var result = GetPixelInSet(new Complex(0,0), new Complex(point.x,point.y));
                         
-                        if (result == 0)
+                        if (result == -1)
                         {
                             imagePixels[x, y] = Color.Black;
                         }
@@ -67,7 +76,7 @@ namespace Mandelbrot_set
                 }
             });
             DrawSet();
-            Refresh();
+            Refresh(); 
         }
         private void CalculateJulia(int X, int Y)
         {
@@ -89,7 +98,7 @@ namespace Mandelbrot_set
                         
                         var result = GetPixelInSet(new Complex(point.x,point.y), new Complex(pointC.x,pointC.y));
                         
-                        if (result == 0)
+                        if (result == -1)
                         {
                             imagePixels[x, y] = Color.Black;
                         }
@@ -103,7 +112,7 @@ namespace Mandelbrot_set
                 }
             });
             DrawSet();
-            Refresh();
+            Refresh(); 
         }
         private void DrawSet()
         {
@@ -123,7 +132,7 @@ namespace Mandelbrot_set
                 Z = (Z * Z) + C;
                 n++;
             }
-            return Z.Modulus() > 2 ? n : 0;
+            return Z.Modulus() > 2 ? n : -1;
         }
         private Point2d coordFromPixelLocation (decimal pixelX,int pixelY,double minCoordX, double maxCoordX,double minCoordY,double maxCoordY)
         {
@@ -149,6 +158,11 @@ namespace Mandelbrot_set
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
             label1.Text = "X=" + e.X + " | Y=" + e.Y;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AnimationJulia();
         }
     }
     public struct Point2d
