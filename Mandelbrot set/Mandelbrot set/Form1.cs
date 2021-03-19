@@ -129,7 +129,7 @@ namespace Mandelbrot_set
             var n = 0;
             while (Z.Modulus() <= 2 && n < iterations)
             {
-                Z = (Z * Z) + C;
+                Z = Pow(Z, 2) + C;
                 n++;
             }
             return Z.Modulus() > 2 ? n : -1;
@@ -164,6 +164,16 @@ namespace Mandelbrot_set
         {
             AnimationJulia();
         }
+        
+        private Complex Pow(Complex a, float n)
+        {
+            var originalA = a;
+            for (int i = 0; i < n - 1; i++)
+            {
+                a = a * originalA;
+            }
+            return a;
+        }
     }
     public struct Point2d
     {
@@ -175,6 +185,7 @@ namespace Mandelbrot_set
             this.y = y;
         }
     }
+
     public struct Complex {
         public double real;
         public double imaginary;
@@ -187,7 +198,7 @@ namespace Mandelbrot_set
         public static Complex operator *(Complex one, Complex two)
         {
             Complex output = new Complex();
-            output.real = (two.real * one.real) + ((two.imaginary * one.imaginary) * - 1);
+            output.real = (two.real * one.real) + ((two.imaginary * one.imaginary) * -1);
             output.imaginary = (two.real * one.imaginary) + (two.imaginary * one.real);
             return output;
         }
