@@ -104,7 +104,7 @@ namespace Mandelbrot_set
                         }
                         else
                         {
-                            var hueValue = (int) ((100 * result) / NumberOfIterations.Value);
+                            var hueValue = (int) ((100 * result) / 30);
                             RGB rgb = ColorConverter.HslToRgb(new HSL(hueValue, 255,50));
                             imagePixels[x, y] = Color.FromArgb(rgb.R, rgb.G, rgb.B);
                         }
