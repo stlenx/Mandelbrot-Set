@@ -23,6 +23,7 @@ namespace Mandelbrot_set
         private int width;
         private int iterations;
         private Color[,] imagePixels;
+        private bool ShipJulia = false;
         public Form1()
         {
             InitializeComponent();
@@ -37,13 +38,25 @@ namespace Mandelbrot_set
         }
         private void AnimationJulia()
         {
-            for (int pos = -width/8; pos < width/2; pos+=1)
+            if (ShipJulia)
             {
-                CalculateJulia(pos,pos);
+                for (int pos = -width/8; pos < width/2; pos+=1)
+                {
+                    CalculateJuliaShip(pos,pos);
+                }
+            }
+            else
+            {
+                for (int pos = -width/8; pos < width/2; pos+=1)
+                {
+                    CalculateJuliaMandelbrot(pos,pos);
+                }
             }
         }
         private void CalculateSet()
         {
+            var colorShit = trackBar1.Value;
+            ShipJulia = false;
             var zoom = (double) ScaleFactor.Value;
             var Xscale = XScale.Value;
             var threads = 24;
@@ -68,7 +81,7 @@ namespace Mandelbrot_set
                         }
                         else
                         {
-                            var hueValue = (int) ((100 * result) / 30);
+                            var hueValue = (int) ((100 * result) / colorShit);
                             RGB rgb = ColorConverter.HslToRgb(new HSL(hueValue, 255,50));
                             imagePixels[x, y] = Color.FromArgb(rgb.R, rgb.G, rgb.B);
                         }
@@ -78,8 +91,48 @@ namespace Mandelbrot_set
             DrawSet();
             Refresh(); 
         }
-        private void CalculateJulia(int X, int Y)
+
+        private void CalculateShip()
         {
+            var colorShit = trackBar1.Value;
+            ShipJulia = true;
+            var zoom = (double) ScaleFactor.Value;
+            var Xscale = XScale.Value;
+            var threads = 24;
+            Parallel.For(0, threads, (i, state) =>
+            {
+                var yStart = width / threads * i;
+                var yEnd = width / threads * (i + 1);
+                for (int y = yStart; y < yEnd; y++)
+                {
+                    for (int x = 0; x < height; x++)
+                    {
+                        var moveLeft =(int) (Xscale * (decimal) zoom) * 100;
+                        var scale = 2 / zoom;
+                        
+                        var point = coordFromPixelLocation(
+                            x-(moveLeft),y,-scale,scale,-scale,scale);
+                        var result = GetPixelInShip(new Complex(0,0), new Complex(point.x,point.y));
+                        
+                        if (result == -1)
+                        {
+                            imagePixels[x, y] = Color.Black;
+                        }
+                        else
+                        {
+                            var hueValue = (int) ((100 * result) / colorShit);
+                            RGB rgb = ColorConverter.HslToRgb(new HSL(hueValue, 255,50));
+                            imagePixels[x, y] = Color.FromArgb(rgb.R, rgb.G, rgb.B);
+                        }
+                    }
+                }
+            });
+            DrawSet();
+            Refresh(); 
+        }
+        private void CalculateJuliaMandelbrot(int X, int Y)
+        {
+            var colorShit = trackBar1.Value;
             var zoom = (double) ScaleFactor.Value;
             var Xscale = XScale.Value;
             Parallel.For(0, 24, (i, state) =>
@@ -104,7 +157,45 @@ namespace Mandelbrot_set
                         }
                         else
                         {
-                            var hueValue = (int) ((100 * result) / 30);
+                            var hueValue = (int) ((100 * result) / colorShit);
+                            RGB rgb = ColorConverter.HslToRgb(new HSL(hueValue, 255,50));
+                            imagePixels[x, y] = Color.FromArgb(rgb.R, rgb.G, rgb.B);
+                        }
+                    }
+                }
+            });
+            DrawSet();
+            Refresh(); 
+        }
+        
+        private void CalculateJuliaShip(int X, int Y)
+        {
+            var colorShit = trackBar1.Value;
+            var zoom = (double) ScaleFactor.Value;
+            var Xscale = XScale.Value;
+            Parallel.For(0, 24, (i, state) =>
+            {
+                var yStart = width / 24 * i;
+                var yEnd = width / 24 * (i + 1);
+                for (int y = yStart; y < yEnd; y++)
+                {
+                    for (int x = 0; x < height; x++)
+                    {
+                        var moveLeft =(int) (Xscale * (decimal) zoom) * 100;
+                        var scale = 2 / zoom;
+
+                        var point = coordFromPixelLocation(x-(moveLeft),y,-scale,scale,-scale,scale);
+                        var pointC = coordFromPixelLocation(X-(moveLeft),Y,-scale,scale,-scale,scale);
+                        
+                        var result = GetPixelInShip(new Complex(point.x,point.y), new Complex(pointC.x,pointC.y));
+                        
+                        if (result == -1)
+                        {
+                            imagePixels[x, y] = Color.Black;
+                        }
+                        else
+                        {
+                            var hueValue = (int) ((100 * result) / colorShit);
                             RGB rgb = ColorConverter.HslToRgb(new HSL(hueValue, 255,50));
                             imagePixels[x, y] = Color.FromArgb(rgb.R, rgb.G, rgb.B);
                         }
@@ -123,6 +214,17 @@ namespace Mandelbrot_set
                     Image.SetPixel(x,y,imagePixels[x,y]);
                 }
             }
+        }
+        
+        private int GetPixelInShip(Complex Z, Complex C)
+        {
+            var n = 0;
+            while (Z.Modulus() <= 2 && n < iterations)
+            {
+                Z = Z.Abs(Z,Z) + C;
+                n++;
+            }
+            return Z.Modulus() > 2 ? n : -1;
         }
         private int GetPixelInSet(Complex Z, Complex C)
         {
@@ -152,7 +254,14 @@ namespace Mandelbrot_set
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-            CalculateJulia(e.X,e.Y);
+            if (ShipJulia)
+            {
+                CalculateJuliaShip(e.X,e.Y);
+            }
+            else
+            {
+                CalculateJuliaMandelbrot(e.X,e.Y);
+            }
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
@@ -173,6 +282,12 @@ namespace Mandelbrot_set
                 a = a * originalA;
             }
             return a;
+        }
+
+        private void Ship_Click(object sender, EventArgs e)
+        {
+            iterations = (int) NumberOfIterations.Value;
+            CalculateShip();
         }
     }
     public struct Point2d
@@ -200,6 +315,14 @@ namespace Mandelbrot_set
             Complex output = new Complex();
             output.real = (two.real * one.real) + ((two.imaginary * one.imaginary) * -1);
             output.imaginary = (two.real * one.imaginary) + (two.imaginary * one.real);
+            return output;
+        }
+
+        public Complex Abs(Complex one, Complex two)
+        {
+            Complex output = new Complex();
+            output.real = (two.real * one.real) + ((two.imaginary * one.imaginary) * -1);
+            output.imaginary = Math.Abs((two.real * one.imaginary) + (two.imaginary * one.real));
             return output;
         }
         public double Modulus() => Math.Sqrt((real * real)+(imaginary * imaginary));

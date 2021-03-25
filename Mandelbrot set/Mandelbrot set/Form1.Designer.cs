@@ -35,9 +35,12 @@
             this.XScale = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.Ship = new System.Windows.Forms.Button();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize) (this.NumberOfIterations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.ScaleFactor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.XScale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -59,6 +62,7 @@
             this.NumberOfIterations.Size = new System.Drawing.Size(68, 20);
             this.NumberOfIterations.TabIndex = 1;
             this.NumberOfIterations.ThousandsSeparator = true;
+            this.NumberOfIterations.Value = new decimal(new int[] {50, 0, 0, 0});
             // 
             // ScaleFactor
             // 
@@ -72,6 +76,7 @@
             // 
             // XScale
             // 
+            this.XScale.DecimalPlaces = 5;
             this.XScale.Location = new System.Drawing.Point(635, 17);
             this.XScale.Maximum = new decimal(new int[] {999999, 0, 0, 0});
             this.XScale.Name = "XScale";
@@ -87,7 +92,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(883, 49);
+            this.button2.Location = new System.Drawing.Point(882, 75);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(88, 22);
             this.button2.TabIndex = 5;
@@ -95,11 +100,33 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // Ship
+            // 
+            this.Ship.Location = new System.Drawing.Point(885, 45);
+            this.Ship.Name = "Ship";
+            this.Ship.Size = new System.Drawing.Size(85, 24);
+            this.Ship.TabIndex = 6;
+            this.Ship.Text = "Ship";
+            this.Ship.UseVisualStyleBackColor = true;
+            this.Ship.Click += new System.EventHandler(this.Ship_Click);
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(272, 10);
+            this.trackBar1.Maximum = 69;
+            this.trackBar1.Minimum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(346, 45);
+            this.trackBar1.TabIndex = 7;
+            this.trackBar1.Value = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 961);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.Ship);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.XScale);
@@ -114,8 +141,14 @@
             ((System.ComponentModel.ISupportInitialize) (this.NumberOfIterations)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.ScaleFactor)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.XScale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBar1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
+
+        private System.Windows.Forms.TrackBar trackBar1;
+
+        private System.Windows.Forms.Button Ship;
 
         private System.Windows.Forms.Button button2;
 
